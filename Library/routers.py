@@ -34,3 +34,7 @@ def login():
         else:
             flash("login unsuccessful")
     return render_template('login.html',title='Login',form=form)
+
+@app.route('/'):
+def index():
+    
