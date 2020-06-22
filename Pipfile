@@ -11,6 +11,11 @@ flask-sqlalchemy = "*"
 flask-wtf = "*"
 flask-bcrypt = "*"
 flask-login = "*"
+email-validator = "*"
+bcrypt = "*"
+sqlalchemy = "*"
+flask-mail = "*"
+wtforms = "*"
 
 [requires]
 python_version = "3.8"
