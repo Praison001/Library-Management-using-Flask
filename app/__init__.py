@@ -15,20 +15,16 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_manager_catogory = 'info' 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Books.db'
-db1 = SQLAlchemy(app)
+con = sqlite3.connect("sqlite:///Books.db") # change to 'sqlite:///your_filename.db'
+cur = con.cursor()
+cur.execute("CREATE TABLE books (ISBN, Title, Author, Pub_year);") # use your column names here
 
+with open('books.csv','r') as data: # `with` statement available in 2.5+
+    # csv.DictReader uses first line in file for column headings by default
+    dr = csv.DictReader(data) # comma is default delimiter
+    to_db = [(i['ISBN'], i['Title'], i['Author'], i['Pub_year']) for i in dr]
 
-# con = sqlite3.connect(":memory:") # change to 'sqlite:///your_filename.db'
-# cur = con.cursor()
-# cur.execute("CREATE TABLE t (col1, col2);") # use your column names here
-
-# with open('data.csv','r') as data: # `with` statement available in 2.5+
-#     # csv.DictReader uses first line in file for column headings by default
-#     dr = csv.DictReader(data) # comma is default delimiter
-#     to_db = [(i['col1'], i['col2']) for i in dr]
-
-cur.executemany("INSERT INTO t (col1, col2) VALUES (?, ?);", to_db)
+cur.executemany("INSERT INTO books (ISBN, Title, Author, Pub_year) VALUES (?, ?, ?, ?);", to_db)
 con.commit()
 con.close()
 
