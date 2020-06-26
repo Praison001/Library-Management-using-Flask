@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review</title>
+</head>
+<body>
+    {% block main %}
+    <form role="form" class="centerContent formMargin" action="{{ url_for('search') }}" method="post">
+        <fieldset>
+            <legend>Search</legend>
+            <div class="form-group">
+                <label for="title">Book title:</label>
+                <input autocomplete="on" autofocus class="form-control" placeholder="Enter the title of the book" id="title"
+                       name="title" type="text" required/>
+            </div>
+            <div class="form-group">
+                <label for="author">Book author (optional):</label>
+                <input autocomplete="on" class="form-control" placeholder="Enter the author of the book" id="author" name="author"
+                       type="text"/>
+            </div>
+        </fieldset>
+        <br><button class="btn btn-lg btn-info centerContent" type="submit">Search</button>
+    </form>
+{% endblock %}
+</body>
+</html>
